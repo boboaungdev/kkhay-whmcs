@@ -1,0 +1,66 @@
+name: Release & Package WHMCS Module
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: PHP Syntax Check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ["7.4", "8.0", "8.1", "8.2", "8.3"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Syntax Linting
+        run: |
+          find modules -name "*.php" -exec php -l {} \;
+
+  package:
+    name: Package WHMCS Gateway Module
+    needs: lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Module ZIP
+        run: |
+          mkdir -p build
+          cp -r modules build/
+          find build -name ".*" -delete
+          cd build
+          zip -r ../kkhay-whmcs.zip modules/
+          cd ..
+          ls -lh kkhay-whmcs.zip
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kkhay-whmcs-zip
+          path: kkhay-whmcs.zip
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: kkhay-whmcs.zip
+          generate_release_notes: true
+

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 32" width="160" height="32" fill="none">
+  <!-- USDT Circle -->
+  <g transform="translate(4, 4)">
+    <circle cx="12" cy="12" r="12" fill="#26A17B"/>
+    <path d="M12 7v2.5M8 9.5h8M12 10.5c-3 0-5 .3-5 .8s2 .8 5 .8 5-.3 5-.8-2-.8-5-.8zm0 2c-3.2 0-5.4.3-5.4.9v3.4c0 .6 2.2.9 5.4.9s5.4-.3 5.4-.9v-3.4c0-.6-2.2-.9-5.4-.9z" stroke="#fff" stroke-width="0.9" fill="none"/>
+    <path d="M11.5 10v6.8h1V10h-1z" fill="#fff"/>
+  </g>
+  <!-- USDC Circle -->
+  <g transform="translate(36, 4)">
+    <circle cx="12" cy="12" r="12" fill="#2775CA"/>
+    <circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.2" fill="none"/>
+    <text x="12" y="16" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="700" font-size="11" text-anchor="middle">$</text>
+  </g>
+  <!-- BNB Circle -->
+  <g transform="translate(68, 4)">
+    <circle cx="12" cy="12" r="12" fill="#F3BA2F"/>
+    <path d="M12 6.5l2.2 2.2-2.2 2.2-2.2-2.2L12 6.5zm-3.8 3.8l1.6 1.6-1.6 1.6-1.6-1.6 1.6-1.6zm7.6 0l1.6 1.6-1.6 1.6-1.6-1.6 1.6-1.6zm-3.8 3.8l2.2 2.2-2.2 2.2-2.2-2.2 2.2-2.2z" fill="#fff"/>
+  </g>
+  <!-- ETH Circle -->
+  <g transform="translate(100, 4)">
+    <circle cx="12" cy="12" r="12" fill="#627EEA"/>
+    <path d="M12 6.5l-.2.5v7.6l.2.2 3.5-2.1L12 6.5z" fill="#fff" fill-opacity="0.6"/>
+    <path d="M12 6.5L8.5 12.7l3.5 2.1V6.5z" fill="#fff"/>
+    <path d="M12 15.3l-.1.1v3.9l.1.3 3.5-4.8-3.5.5z" fill="#fff" fill-opacity="0.6"/>
+    <path d="M12 19.6v-4.3L8.5 14.8 12 19.6z" fill="#fff"/>
+  </g>
+  <!-- Plus / More text -->
+  <g transform="translate(132, 4)">
+    <rect width="24" height="24" rx="12" fill="#18181B" fill-opacity="0.08"/>
+    <text x="12" y="16" fill="#71717A" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="700" font-size="10" text-anchor="middle">+4</text>
+  </g>
+</svg>
+
