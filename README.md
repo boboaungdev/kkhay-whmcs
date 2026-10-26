@@ -11,9 +11,8 @@ The official **[K Khay](https://kkhay.com)** payment gateway module for **WHMCS*
 
 ## 🌟 Key Features
 
-* **Multi-Chain Stablecoins**: Accept **USDT** & **USDC** across BSC, Polygon, Arbitrum, Base, and Ethereum mainnet.
-* **Native Assets**: Accept **BNB** and **ETH** natively.
-* **Non-Custodial & Sovereign**: Receive funds directly into your own merchant wallets — immune to payment processor freezes.
+* **Multi-Chain Stablecoins & Crypto**: Accept **USDT**, **USDC**, **BTC**, **ETH**, **SOL**, **TON**, **BNB**, **TRX**, **DOGE**, **XRP**, and **LTC** across 190+ blockchains.
+* **Non-Custodial & Sovereign**: Receive funds directly into your own wallets — immune to payment processor freezes.
 * **Hosted Checkout Experience**: Mobile-responsive checkout with dynamic QR codes, live network switches, and real-time payment listeners.
 * **Instant Payment Notifications (IPN)**: Webhooks cryptographically signed with **HMAC-SHA256** automatically mark WHMCS invoices as Paid upon blockchain confirmation.
 * **Replay Protection**: Automatic transaction hash duplicate checks (`checkCbTransID`) prevent double-crediting.
@@ -61,15 +60,15 @@ rm -rf /tmp/kkhay-whmcs
 3. Locate **K Khay (Crypto: USDT, USDC, BNB, ETH)** and click **Activate**.
 4. Configure the gateway fields:
    * **Show on Order Form**: Check to enable for customers.
-   * **Visible Name**: `K Khay (Crypto: USDT, USDC, BNB, ETH)`
-   * **Merchant API Key**: Enter your API Key from [K Khay Merchant Dashboard](https://kkhay.com) &rarr; **API Keys**.
+   * **Visible Name**: `K Khay (Crypto Payments)`
+   * **Gateway API Key**: Enter your API Key from [K Khay Gateway Dashboard](https://kkhay.com) &rarr; **API Keys**.
    * **Webhook / IPN Secret**: Enter your Webhook Secret from the K Khay Dashboard.
    * **API Base URL**: `https://api.kkhay.com` *(or your custom self-hosted gateway URL)*.
 5. Copy your **Webhook / IPN URL** shown on the configuration screen:
    ```text
    https://yourdomain.com/modules/gateways/callback/kkhay.php
    ```
-6. Paste this URL into your **K Khay Merchant Dashboard** under **Webhook Settings** and select events (`invoice.paid`, `invoice.completed`).
+6. Paste this URL into your **K Khay Gateway Dashboard** under **Webhook Settings** and select events (`invoice.paid`, `invoice.completed`).
 7. Click **Save Changes**.
 
 ---

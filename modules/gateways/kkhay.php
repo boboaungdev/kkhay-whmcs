@@ -60,11 +60,11 @@ function kkhay_config(): array
             'Value' => 'K Khay (Crypto: USDT, USDC, BNB, ETH)',
         ],
         'apiKey' => [
-            'FriendlyName' => 'Merchant API Key',
+            'FriendlyName' => 'Gateway API Key',
             'Type' => 'text',
             'Size' => '50',
             'Default' => '',
-            'Description' => 'Your K Khay API Key from Merchant Dashboard &rarr; API Keys',
+            'Description' => 'Your K Khay API Key from Gateway Dashboard &rarr; API Keys',
         ],
         'webhookSecret' => [
             'FriendlyName' => 'Webhook / IPN Secret',
@@ -84,7 +84,7 @@ function kkhay_config(): array
             'FriendlyName' => 'Webhook / IPN URL',
             'Type' => 'info',
             'Description' => '<code>' . htmlspecialchars($callbackUrl) . '</code><br>' .
-                             '<small style="color:#6b7280;">Copy this URL and paste it into your K Khay Dashboard under Webhook Settings.</small>',
+                             '<small style="color:#6b7280;">Copy this URL and paste it into your K Khay Gateway Dashboard under Webhook Settings.</small>',
         ],
     ];
 }
@@ -112,7 +112,7 @@ function kkhay_link(array $params): string
 
     if (empty($apiKey)) {
         return '<div class="alert alert-danger" style="margin:10px 0;border-radius:8px;">'
-             . '<strong>K Khay:</strong> Gateway is active but Merchant API Key is not configured. Please configure in WHMCS Admin Area.'
+             . '<strong>K Khay:</strong> Gateway is active but Gateway API Key is not configured. Please configure in WHMCS Admin Area.'
              . '</div>';
     }
 
@@ -124,11 +124,17 @@ function kkhay_link(array $params): string
     $payload = [
         'orderId' => (string) $invoiceId,
         'amount' => (float) $amount,
-        'currency' => $currency,
+        'priceAmount' => (float) $amount,
+        'currency' => strtoupper($currency),
+        'priceCurrency' => strtoupper($currency),
         'title' => 'Invoice #' . $invoiceId,
         'description' => 'Payment for WHMCS Invoice #' . $invoiceId,
         'callbackUrl' => $callbackUrl,
+        'ipnCallbackUrl' => $callbackUrl,
         'returnUrl' => $returnUrl,
+        'redirectUrl' => $returnUrl,
+        'customerName' => $customerName,
+        'customerEmail' => $customerEmail,
         'customer' => [
             'name' => $customerName,
             'email' => $customerEmail,
@@ -143,8 +149,12 @@ function kkhay_link(array $params): string
     try {
         $response = $client->createInvoice($payload);
 
-        $checkoutUrl = $response['checkoutUrl']
+        $checkoutUrl = $response['hostedUrl']
+            ?? $response['checkoutUrl']
             ?? $response['paymentUrl']
+            ?? ($response['invoice']['hostedUrl'] ?? null)
+            ?? ($response['invoice']['checkoutUrl'] ?? null)
+            ?? ($response['data']['hostedUrl'] ?? null)
             ?? ($response['data']['checkoutUrl'] ?? null)
             ?? ($response['data']['paymentUrl'] ?? null);
 

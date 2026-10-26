@@ -76,7 +76,7 @@ class Client
         $headers = [
             'Accept: application/json',
             'x-api-key: ' . $this->apiKey,
-            'User-Agent: kkhay-whmcs/1.0.0 (PHP/' . PHP_VERSION . ')',
+            'User-Agent: kkhay-whmcs/1.0.4 (PHP/' . PHP_VERSION . ')',
         ];
 
         $ch = curl_init();
@@ -135,7 +135,7 @@ class Client
      */
     public function createInvoice(array $payload): array
     {
-        return $this->request('/v1/merchant/invoices', 'POST', $payload);
+        return $this->request('/v1/gateway/invoices', 'POST', $payload);
     }
 
     /**
@@ -147,7 +147,7 @@ class Client
      */
     public function getInvoice(string $invoiceId): array
     {
-        return $this->request('/v1/merchant/invoices/' . rawurlencode(trim($invoiceId)), 'GET');
+        return $this->request('/v1/gateway/invoices/' . rawurlencode(trim($invoiceId)), 'GET');
     }
 
     /**
